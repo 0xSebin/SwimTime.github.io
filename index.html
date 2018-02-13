@@ -27,7 +27,6 @@
   </head>
 
   <body id="page-top">
-
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
@@ -41,16 +40,19 @@
               <a class="nav-link js-scroll-trigger" href="#about">About</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#why">Why Swimtime</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#solution">Solution</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#features">Product Features</a>
+              <a class="nav-link js-scroll-trigger" href="#features">Features</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#technical">Implementation Details</a>
+              <a class="nav-link js-scroll-trigger" href="#Analysis">Analysis Portal FAQ</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#doc">Documentation</a>
+              <a class="nav-link js-scroll-trigger" href="#board">Implementation</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
@@ -84,17 +86,17 @@
             <h2 class="section-heading text-white">About</h2>
             <hr class="light my-4">
             <p class="text-faded mb-4">SwimTime uses an ultrasonic sensor to aid swimmers get closer to their goals. Attached on one end of the pool, it detects when you finished your lap and automatically records your lap times. Through a user interface you can control this IoT module and also track your performance over time.</p>
-            <a class="btn btn-light btn-xl js-scroll-trigger" href="#solution">Find out more about the solution</a>
+            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#why">SwimTime Purpose</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="solution">
+    <section id="why">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Solution</h2>
+            <h2 class="section-heading">Why SwimTime?</h2>
             <hr class="my-4">
           </div>
         </div>
@@ -103,15 +105,13 @@
         <div class="row">
           <div class="col-lg-6 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
-              <i class="fa fa-4x fa-newspaper-o text-primary mb-3 sr-icons"></i>
-              <h5 class="mb-3">How to use SwimTime?</h4>              
               <img class="img-fluid" src="img/swim_lane.jpg" alt="">
             </div>
           </div>
           <div class="col-lg-6 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
-              <p class="mb-3  text-justify">All the user must do is specify through the website how many laps they are planning to do. A couple seconds thereafter the timer begins. The ultrasonic sensor measures the distance to the swimmer by transmitting and receiving sound waves and can detect when the swimmer has finished their lap. At that moment, SwimTime records the lap time, sends the data to the website and resets the timer for the next lap. This repeats until the swimmer finishes all the laps specified. The website stores the necessary information to track a swimmer’s performance over time.</p>
-              <a class="btn btn-dark btn-xl js-scroll-trigger" href="#features">Find out more about the features</a>
+              <p class="mb-3  text-justify">To progress in any competitive activity, one must be able to evaluate their performance to push their boundaries to the limit. Swimming is no different. The difficulty lies in being able to accurately and precisely measure your lap times to compare against others as well as your previous sessions. SwimTime provides automated and effective tracking of your swimming so that you can set your goals and observe how you achieve them over time.</p>
+              <a class="btn btn-dark btn-xl js-scroll-trigger" href="#solution">See Solution</a>
             </div>
           </div>
           <div class="row">
@@ -123,16 +123,49 @@
       </div>
     </section>
 
-    <section class="bg-primary" id="features">
+    <section class="bg-primary" id="solution">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-white">Solution</h2>
+            <hr class="light my-4">
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <i class="fa fa-4x fa-newspaper-o text-faded mb-3 sr-icons"></i>
+              <h5 class="mb-3 text-white">How to use SwimTime?</h4>              
+              <img class="img-fluid" src="img/swim_lane.jpg" alt="">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <p class="mb-3  text-justify text-white">All the user must do is specify through the website how many laps they are planning to do. A couple seconds thereafter the timer begins. The ultrasonic sensor measures the distance to the swimmer by transmitting and receiving sound waves and can detect when the swimmer has finished their lap. At that moment, SwimTime records the lap time, sends the data to the website and resets the timer for the next lap. This repeats until the swimmer finishes all the laps specified. The website stores the necessary information to track a swimmer’s performance over time.</p>
+              <a class="btn btn-dark btn-xl js-scroll-trigger" href="#features">See Product features</a>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12 mx-auto text-center">
+                
+              </div>
+          </div> 
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto text-center">
-            <h2 class="section-heading text-white">Product Features</h2>
-            <hr class="light my-4">
+            <h2 class="section-heading">Product Features</h2>
+            <hr class="my-4">
             <div class="row">
               <div class="col-lg-6 mx-auto text-center">
-                <h2 class="text-faded mb-4 text-justify">Connect to the Internet</h2>
-                <p class="text-faded mb-4 text-justify">The connection of the board to the internet facilitates the flow of information between the module and the website. The module receives the number of laps you specified on the website before you start swimming and sends the lap times back to the website when you are done.</p>                
+                <h2 class="mb-4 text-justify">Connect to the Internet</h2>
+                <p class="mb-4 text-justify">The connection of the board to the internet facilitates the flow of information between the module and the website. The module receives the number of laps you specified on the website before you start swimming and sends the lap times back to the website when you are done.</p>                
               </div>
               <div class="col-lg-6 mx-auto text-center">
                 <br>
@@ -147,14 +180,14 @@
                 <img class="img-fluid" src="img/new2/timer.png" alt="">
               </div>
               <div class="col-lg-6 mx-auto text-center">
-                <h2 class="text-faded mb-4 text-justify">Automatically Measure Your Lap-Times</h2>
-                <p class="text-faded mb-4 text-justify">Equipped with an ultrasonic sensor, the board can detect when you have finished one lap by sending high frequency sound waves and timing how long it took for the echo to arrive back.</p>
+                <h2 class="mb-4 text-justify">Automatically Measure Your Lap-Times</h2>
+                <p class="mb-4 text-justify">Equipped with an ultrasonic sensor, the board can detect when you have finished one lap by sending high frequency sound waves and timing how long it took for the echo to arrive back.</p>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-6 mx-auto text-center">
-                <h2 class="text-faded mb-4text-justify">Track Your Performance</h2>
-                <p class="text-faded mb-4 text-justify">After you are done with your session you can visit the website to see how well you performed. Over time you can track your improvement by analysing the change in your overall times and by extracting information about your stamina from the individual lap times.</p>
+                <h2 class="mb-4text-justify">Track Your Performance</h2>
+                <p class="mb-4 text-justify">After you are done with your session you can visit the website to see how well you performed. Over time you can track your improvement by analysing the change in your overall times and by extracting information about your stamina from the individual lap times.</p>
               </div>
               <div class="col-lg-6 mx-auto text-center">
                 <br>
@@ -170,118 +203,116 @@
                 <img class="img-fluid" src="img/new2/web.png" alt="">
               </div>
               <div class="col-lg-6 mx-auto text-center">
-                <h2 class="text-faded mb-4 text-justify">User-Friendly Interface</h2>
-                <p class="text-faded mb-4 text-justify">The simple yet effective user interface means you can focus on your swimming and let SwimTime do the rest.</p>
+                <h2 class="mb-4 text-justify">User-Friendly Interface</h2>
+                <p class="mb-4 text-justify">The simple yet effective user interface means you can focus on your swimming and let SwimTime do the rest.</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 mx-auto text-center">
+                <br>
+                <h2 class="mb-4 text-justify">Measure Temperature</h2>
+                <p class="mb-4 text-justify">SwimTime uses a thermometer to let you know if your pool is operating at the ideal temperature.</p>
+              </div>
+              <div class="col-lg-6 mx-auto text-center">
+                <br>
+                <br>
+                <img class="img-fluid" src="img/temp.png" alt="">
               </div>
             </div>
             <hr class="light my-4">
-            <a class="btn btn-light btn-xl js-scroll-trigger" href="#technical">Find out more about the technical Implementation</a>
+            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#analysis">Analysis Dashboard FAQ</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="bg-primary" id="analysis">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="section-heading text-white">Analysis Dashboard FAQ</h2>
+            <hr class="light my-4">
+            <p class="text-white mb-4 text-justify text-bold">Q. How do you signal the start of your session?<br>A. Simply select the number of laps you wish to swim with the "lap slider" and press "start."</p><br>
+            <p class="text-white mb-4 text-justify text-bold">Q. How is the data transferred to this analysis dashboard?<br>A. You don't need to worry about the data transfer between the SwimTime device and the analysis dashboard. This is done automatically over an MQTT broker.</p>
+            <p class="text-white mb-4 text-justify text-bold">Q. What analysis tools/data processing are available on this dashboard?<br>A. Several useful tools have been incorporated in the analysis dashboard that allow you to monitor various aspects of your swimming. These tools include a real-time stream that displays the lap times as you complete each lap and a dynamic graph to depict the evolution of your lap times. Values such as your best, worst, total and average lap times are also shown for your complete session. Finally, as an indication of the swimming conditions a temperature measure is also displayed.</p><br>
+            <hr class="light my-4">
+            <img class="img-fluid" src="img/Dashboard.png" alt=""><br>
+            <hr class="light my-4">
+            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#board">See Technical Implementation</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="p-0" id="technical">
-      <div class="container-fluid p-0">
-        <div class="row no-gutters popup-gallery">
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </div>
-            </a>
+    <section id="board">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Board Setup</h2>
+            <hr class="my-4">
           </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/2.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/2.jpg" alt="">
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </div>
-            </a>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <img class="img-fluid" src="img/swim_lane.jpg" alt="">
+            </div>
           </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/3.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/3.jpg" alt="">
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </div>
-            </a>
+          <div class="col-lg-6 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <p class="mb-3  text-justify">Text on how the board is configured</p>
+              <a class="btn btn-dark btn-xl js-scroll-trigger" href="#mqtt">More Information on the MQTT</a>
+            </div>
           </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/4.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/4.jpg" alt="">
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
+          <div class="row">
+              <div class="col-lg-12 mx-auto text-center">
+                
               </div>
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/5.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/5.jpg" alt="">
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/6.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/6.jpg" alt="">
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Category
-                  </div>
-                  <div class="project-name">
-                    Project Name
-                  </div>
-                </div>
-              </div>
-            </a>
+          </div> 
+        </div>
+      </div>
+    </section>
+    <section class="bg-primary" id="mqtt">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="section-heading text-white">MQTT Setup</h2>
+            <hr class="light my-4">
+            <p class="text-white mb-4 text-justify text-bold">Text on MQTT.</p>
+            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#dashboard">Analysis Dashboard</a>
           </div>
         </div>
       </div>
     </section>
-
-    <section class="bg-dark text-white" id="doc">
-      <div class="container text-center">
-        <h2 class="mb-4">Download Our Documentation for More Detail</h2>
-        <a class="btn btn-light btn-xl sr-button" target="documentation.pdf" href="documentation.pdf">Download Now!</a>
+    <section id="dashboard">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading">Analysis Dashboard Implementation</h2>
+            <hr class="my-4">
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <img class="img-fluid" src="img/swim_lane.jpg" alt="">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <p class="mb-3  text-justify">Text on Analysis Dashboard.</p>
+              <a class="btn btn-dark btn-xl js-scroll-trigger" href="#contact">Swimtime Contact Details</a>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12 mx-auto text-center">
+                
+              </div>
+          </div> 
+        </div>
       </div>
     </section>
 
@@ -294,7 +325,7 @@
             <p class="mb-5">Feel free to contact us to learn more about SwimTime. Give us a call or send us an email and we will get back to you as soon as possible.</p>
           </div>
         </div>
-        <div id="map" style="width:1100px;height:400px;">My map will go here</div>
+        <div id="map" style="width:auto;height:400px;">My map will go here</div>
         <script>
           function myMap() {
             var uluru = {lat: 51.499208, lng: -0.174882};
@@ -336,14 +367,14 @@
             </p>
           </div>
         </div>
-        <div class="footer-below bg-primary">
+        <!--<div class="footer-below bg-primary">
           <div class="col-lg-12 text-center">
             <h5>
                         Copyright &copy; SwimTime 2018
             </h5>
           </div>
         </div>
-    </footer>
+    </footer> -->
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -356,7 +387,6 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
-
   </body>
 
 </html>
