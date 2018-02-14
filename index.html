@@ -270,7 +270,7 @@
           </div>
           <div class="col-lg-6 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
-              <p class="mb-3  text-justify">The Adafruit Feather HUZZAH ESP8266 board reads/writes data to/from sensors, process the data and establishes a Wifi connection with the MQTT. The board interfaces with sensors via an I2C interface; SwimTime board interfaces with 3 sensors: a buzzer, a temperature sensor and an ads115 analog to digital converter. The ads115 receives an analog signal, from the range finder sensor, proportional to the distance. The distance data allows SwimTime to successfully measure the lap times.</p>
+              <p class="mb-3  text-justify">The Adafruit Feather HUZZAH ESP8266 board reads/writes data to/from sensors, processes the data and establishes a WiFi connection with the MQTT. The board interfaces with sensors via an I2C interface; the SwimTime board interfaces with four components: an ultrasonic range sensor, a temperature sensor, a buzzer, and an ADS115 analog to digital converter. The ADS115 receives an analog signal from the ultrasonic range sensor, which is proportional to the distance. This signal is converted to a distance measure, which is subsequently compared to a threshold. If the measure is less than the threshold value, the device considers a lap to be completed. It then records the lap time and resets the timer for the next lap.</p>
               <a class="btn btn-dark btn-xl js-scroll-trigger" href="#mqtt">More Information on the MQTT</a>
             </div>
           </div>
@@ -288,7 +288,7 @@
           <div class="col-lg-8 mx-auto text-center">
             <h2 class="section-heading text-white">MQTT Implementation</h2>
             <hr class="light my-4">
-            <p class="text-white mb-4 text-justify text-bold">The Message Queuing Telemetry Transport (MQTT) is an internet protocol that enables SwimTime to communicate with the internet. It acts as a broker between the sensors and the server. SwimTime data is published to an online MQTT broker, which is subscribed to by Adafruit IO MQTT server.</p>
+            <p class="text-white mb-4 text-justify text-bold">The Message Queuing Telemetry Transport (MQTT) is an internet protocol that enables SwimTime to communicate with the Internet. It acts as a broker between the sensors and the server. SwimTime data is published to an online MQTT broker, which is subscribed to by Adafruit IO MQTT server.</p>
             <a class="btn btn-dark btn-xl js-scroll-trigger" href="#dashboard">Analysis Dashboard</a>
           </div>
         </div>
@@ -300,7 +300,7 @@
           <div class="col-lg-8 mx-auto text-center">
             <h2 class="section-heading">Analysis Dashboard Implementation</h2>
             <hr class="my-4">
-            <p class="mb-3  text-justify">The Adafruit IO MQTT server stores data, plot the lap times and displays the minimum, maximum and average lap time. In addition to lap times, SwimTime website displays water temperature.</p>
+            <p class="mb-3  text-justify">The Adafruit IO MQTT server stores data, plots the lap times and displays the minimum, maximum and average lap time, as well as the total time of the laps specified. In addition to lap times, the dashboard displays the water temperature.</p>
             <a class="btn btn-dark btn-xl" href="https://io.adafruit.com/kk2314/dashboards/swimtime">Access Analysis Dashboard</a>
           </div>
         </div>
