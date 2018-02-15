@@ -6,11 +6,12 @@ Group -
 SwimTime - Swim your way to success
 
 """
-import machine
+
 import ads1x15
 import network
 import time
 import math
+import machine
 from umqtt.simple import MQTTClient
 import micropython
 from micropython import const
@@ -32,7 +33,7 @@ user = "kk2314"
 passwd = "674d8794c84d49008c5e0092dc6be24b"
 mqtt_temp = "kk2314/feeds/temp"
 mqtt_time = "kk2314/feeds/time"
-mqtt_rawdata =  "kk2314/feeds/rawdata"
+mqtt_rawdata = "kk2314/feeds/rawdata"
 mqtt_control = "kk2314/feeds/control"
 mqtt_stat = "kk2314/feeds/stat"
 mqtt_debug = "kk2314/feeds/debug"
@@ -78,7 +79,7 @@ def sub_cb(topic, msg):
     		run = True	
     	elif msg.decode() == "temp":
     		get_temp()
-    		payload_temp= "{}".format(temp)
+    		payload_temp = "{}".format(temp)
     		c.publish(mqtt_temp,payload_temp)
     		print(temp)
     	else:
@@ -120,10 +121,10 @@ def convert(data):
 #Send a read request and read information of temp sensor as well as convert temp into degree celcius
 def get_temp():	
 	global temp
-	i2c_temp.writeto(0x40,bytearray([0xf3]))
+	i2c_temp.writeto(0x40, bytearray([0xf3]))
 	time.sleep(0.5)
-	data=i2c_temp.readfrom(0x40,2)
-	tempraw=int.from_bytes(data,"big")
+	data=i2c_temp.readfrom(0x40, 2)
+	tempraw=int.from_bytes(data, "big")
 	temp = 175.72 * tempraw / 65536
 	temp = temp - 46.85
 
@@ -146,8 +147,8 @@ def countdown():
 #converts secs into min and seconds	
 def format(sec):
 	sec = sec/1000
-	mins,secs = divmod(sec, 60)
-	secs=round(secs, 3)	
+	mins, secs = divmod( sec, 60)
+	secs = round(secs, 3)	
 	return (mins, secs)
 	
 #main() function which executes sensing and mqtt push		
@@ -199,8 +200,8 @@ def main(server):
 				#wait for user to go away from sensor			
 				time.sleep(5)   
 				#resets statistical variables every beginning of run			
-				lap_index =0 
-				best_lap=0
+				lap_index = 0 
+				best_lap= 0
 				avr_lap = 0
 				total_time= 0 
 				worst_lap = 0
@@ -212,10 +213,10 @@ def main(server):
 				
 					#if sensor detects object within threshold it times a lap
 					if distance < 0.80: 
-						lap_time_raw = time.ticks_diff(time.ticks_ms(),start)
+						lap_time_raw = time.ticks_diff(time.ticks_ms(), start)
 						#reset time measure
 						start = time.ticks_ms()
-						c.publish(mqtt_debug,"Lap end detected")
+						c.publish(mqtt_debug, "Lap end detected")
 						
 						lap_index = lap_index + 1
 						
@@ -225,10 +226,10 @@ def main(server):
 							worst_lap = lap_time_raw
 							worst_index = lap_index
 						#update average lap_time	
-						avr_lap=total_time/lap_index
+						avr_lap = total_time/lap_index
 						#check if lap is the fastest
 						if lap_index == 1:
-							best_lap= lap_time_raw
+							best_lap = lap_time_raw
 							best_index = 1
 						elif lap_time_raw < best_lap:
 							best_lap = lap_time_raw	
@@ -239,20 +240,20 @@ def main(server):
 						mins_bs, secs_bs = format(best_lap)
 						mins_ws, secs_ws = format(worst_lap)
 						mins_to, secs_to = format(total_time)		
-						mins   , secs = format(lap_time_raw) 
+						mins, secs = format(lap_time_raw) 
 						#read current temp 				
 						get_temp()
 						#send alert if temperature is outside ideal range
 						if temp > 21 and temp < 29:
-							c.publish(mqtt_tempalert,"Temperature is ideal for a splash, Happy Swimming!")
+							c.publish(mqtt_tempalert, "Temperature is ideal for a splash, Happy Swimming!")
 						elif temp < 21:
-							c.publish(mqtt_tempalert,"Careful! We have detected temperature is outside ideal range (Too low)")
+							c.publish(mqtt_tempalert, "Careful! We have detected temperature is outside ideal range (Too low)")
 						elif temp > 29:	
-							c.publish(mqtt_tempalert,"Careful! We have detected temperature is outside ideal range (Too high)")			
+							c.publish(mqtt_tempalert, "Careful! We have detected temperature is outside ideal range (Too high)")			
 					
 						#encode all data to JSON - manually to save memory 					
 						payload_temp = "{}".format(temp)
-						payload = " Lap number {} was: {} m {} s.  ".format(lap_index,mins,secs)
+						payload = " Lap number {} was: {} m {} s.  ".format( lap_index, mins, secs)
 						payload_raw = "{}".format(lap_time_raw/1000)
 						payload_stat_av = "Average lap time is : {} m {} s ".format(mins_av,secs_av)
 						payload_stat_bs = "Best lap was lap number {} : {} m {} s ".format(best_index,mins_bs,secs_bs)
@@ -266,12 +267,12 @@ def main(server):
 						c.publish(mqtt_stat,payload_stat_bs)
 						c.publish(mqtt_stat,payload_stat_ws)
 						c.publish(mqtt_stat,payload_stat_to)
-						c.publish(mqtt_debug,"Data published successfully")
+						c.publish(mqtt_debug, "Data published successfully")
 						lapnr = lapnr - 1
 						#wait for 10 sec for object to get out of range of sensor 
 						if lapnr != 0:
 							time.sleep(10)
-				c.publish(mqtt_debug,"Done with current run") 		#debug messages
+				c.publish(mqtt_debug, "Done with current run") 		#debug messages
 			
 			
 		else:
@@ -279,8 +280,11 @@ def main(server):
 		
 		
 			 #start timing laps
-			if run == True:   
-				run = False		
+			if run == True: 
+				#reset the run flag   
+				
+				run = False
+				#do countdown		
 				countdown()
 				c.publish(mqtt_debug,"Started countdown")
 				#start timer
@@ -290,32 +294,36 @@ def main(server):
 				#wait for user to go away from sensor			
 				time.sleep(5)   
 				#resets statistical variables every beginning of run			
-				lap_index =0 
-				best_lap=0
+				lap_index = 0 
+				best_lap= 0
 				avr_lap = 0
 				total_time= 0 
 				worst_lap = 0
 				#main while loop which continues until lapnr goes to 0 			
-				while lapnr > 0:				
+				while lapnr > 0:
+					blink_LED(blue)				
 					data = adc.read(0)    
 					convert(data)
 				
-				
-					if distance < 0.80:
-						lap_time_raw = time.ticks_diff(time.ticks_ms(),start)
+					#if sensor detects object within threshold it times a lap
+					if distance < 0.80: 
+						lap_time_raw = time.ticks_diff(time.ticks_ms(), start)
+						#reset time measure
 						start = time.ticks_ms()
-						c.publish(mqtt_debug,"Lap end detected")
+						c.publish(mqtt_debug, "Lap end detected")
+						
 						lap_index = lap_index + 1
-						#check if the lap is the best 
+						
 						total_time = total_time + lap_time_raw
+						#check if the lap is the slowest 
 						if lap_time_raw > worst_lap:
 							worst_lap = lap_time_raw
 							worst_index = lap_index
-						#update average lat_time	
-						avr_lap=total_time/lap_index
+						#update average lap_time	
+						avr_lap = total_time/lap_index
 						#check if lap is the fastest
 						if lap_index == 1:
-							best_lap= lap_time_raw
+							best_lap = lap_time_raw
 							best_index = 1
 						elif lap_time_raw < best_lap:
 							best_lap = lap_time_raw	
@@ -326,19 +334,26 @@ def main(server):
 						mins_bs, secs_bs = format(best_lap)
 						mins_ws, secs_ws = format(worst_lap)
 						mins_to, secs_to = format(total_time)		
-						mins   , secs = format(lap_time_raw) 
+						mins, secs = format(lap_time_raw) 
 						#read current temp 				
 						get_temp()
+						#send alert if temperature is outside ideal range
+						if temp > 21 and temp < 29:
+							c.publish(mqtt_tempalert, "Temperature is ideal for a splash, Happy Swimming!")
+						elif temp < 21:
+							c.publish(mqtt_tempalert, "Careful! We have detected temperature is outside ideal range (Too low)")
+						elif temp > 29:	
+							c.publish(mqtt_tempalert, "Careful! We have detected temperature is outside ideal range (Too high)")			
 					
 						#encode all data to JSON - manually to save memory 					
 						payload_temp = "{}".format(temp)
-						payload = "{{ Lap number {} was: {} m {} s.  }}".format(lap_index,mins,secs)
+						payload = " Lap number {} was: {} m {} s.  ".format( lap_index, mins, secs)
 						payload_raw = "{}".format(lap_time_raw/1000)
 						payload_stat_av = "Average lap time is : {} m {} s ".format(mins_av,secs_av)
 						payload_stat_bs = "Best lap was lap number {} : {} m {} s ".format(best_index,mins_bs,secs_bs)
 						payload_stat_ws = "Worst lap was lap number {} : {} m {} s ".format(worst_index,mins_ws,secs_ws)
 						payload_stat_to = "Total time is : {} m {} s ".format(mins_to,secs_to)
-						#push to mqtt broker					
+						#publish converted and raw data to mqtt broker					
 						c.publish(mqtt_time,payload)
 						c.publish(mqtt_rawdata, payload_raw)
 						c.publish(mqtt_temp,payload_temp)
@@ -346,12 +361,12 @@ def main(server):
 						c.publish(mqtt_stat,payload_stat_bs)
 						c.publish(mqtt_stat,payload_stat_ws)
 						c.publish(mqtt_stat,payload_stat_to)
-						c.publish(mqtt_debug,"Data published successfully")
+						c.publish(mqtt_debug, "Data published successfully")
 						lapnr = lapnr - 1
-						#wait for 10 sec for object to get out of range of sensor
+						#wait for 10 sec for object to get out of range of sensor 
 						if lapnr != 0:
 							time.sleep(10)
-				c.publish(mqtt_debug,"Done with current run")
+				c.publish(mqtt_debug, "Done with current run") 		#debug messages
 		
 				
 		
