@@ -100,7 +100,7 @@ while not sta_if.isconnected():
 	blink_LED(red)
 	pass
 print('Wifi connected')
-#Turn red LED on
+#Turn red LED on (active-low)
 red.off()
 
 # Turn off ESP8266's AP
@@ -112,8 +112,8 @@ def convert(data):
 	global distance 
 	
 	distance = data/10000
-	distance = distance/0.000976562 
-	distance = (distance/1000)+0.16	
+	distance = distance/0.000976562 #vcc/(1025*5)
+	distance = (distance/1000)+0.16	#distance offset
 
 
 	
@@ -140,7 +140,7 @@ def countdown():
 		count = count + 1
 	buzz.freq(500)
 	buzz.duty(512)
-	time.sleep(1.25)
+	time.sleep(1.25) 
 	buzz.duty(1023)	
 
 #converts secs into min and seconds	
@@ -210,11 +210,13 @@ def main(server):
 					data = adc.read(0)    
 					convert(data)
 				
-				
-					if distance < 0.80: #add comment 
+					#if sensor detects object within threshold it times a lap
+					if distance < 0.80: 
 						lap_time_raw = time.ticks_diff(time.ticks_ms(),start)
+						#reset time measure
 						start = time.ticks_ms()
 						c.publish(mqtt_debug,"Lap end detected")
+						
 						lap_index = lap_index + 1
 						
 						total_time = total_time + lap_time_raw
@@ -346,7 +348,7 @@ def main(server):
 						c.publish(mqtt_stat,payload_stat_to)
 						c.publish(mqtt_debug,"Data published successfully")
 						lapnr = lapnr - 1
-					
+						#wait for 10 sec for object to get out of range of sensor
 						if lapnr != 0:
 							time.sleep(10)
 				c.publish(mqtt_debug,"Done with current run")
