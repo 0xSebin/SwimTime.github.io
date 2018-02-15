@@ -47,7 +47,7 @@ blue = Pin(2, Pin.OUT)
 p12 = machine.Pin(12)
 buzz = machine.PWM(p12)		             
 
-blue.off()
+
 
 #function to blink LED
 def blink_LED(colour):
@@ -157,11 +157,13 @@ def main(server):
 	global nr
 	global c
 	global mqttConnected
-"""	
-Defines which client to connect to. 
-Using adafruit.io broker requires authentification 
-so we also set username and password
-"""	
+	
+	"""	
+	Defines which client to connect to. 
+	Using adafruit.io broker requires authentification 
+	so we also set username and password
+	"""	
+
 	c = MQTTClient("Sensor boards", server, user = user, password = passwd)
 	c.set_callback(sub_cb)
 
@@ -185,6 +187,7 @@ so we also set username and password
 			#start timing laps
 			if run == True: 
 				#reset the run flag   
+				
 				run = False
 				#do countdown		
 				countdown()
@@ -202,7 +205,8 @@ so we also set username and password
 				total_time= 0 
 				worst_lap = 0
 				#main while loop which continues until lapnr goes to 0 			
-				while lapnr > 0:				
+				while lapnr > 0:
+					blink_LED(blue)				
 					data = adc.read(0)    
 					convert(data)
 				
