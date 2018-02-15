@@ -1,4 +1,4 @@
-# [Swimtime](https://swimtime.github.io)
+# [SwimTime](https://swimtime.github.io)
 
 SwimTime is the IoT project for EE3-24 Embedded Systems from team TAY. SwimTime is a device which accompanies the user in the swimming pool and records and tracks your lap times, as well as other relavant data (best, worst, average lap times, and total time for whole session) for your workout. It also uses a temperature sensor to display the temperature of the pool and let the swimmer know if he/she is swimming in ideal conditions.
 
