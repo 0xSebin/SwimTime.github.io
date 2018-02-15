@@ -25,6 +25,8 @@ run = False
 
 lapnr = 3  #default lap number
 temp = 0.0 
+wifi_ssid = "Alfabeta"
+wifi_pswd = "12345678"
 server = "io.adafruit.com" 
 user = "kk2314"
 passwd = "674d8794c84d49008c5e0092dc6be24b"
@@ -47,17 +49,17 @@ buzz = machine.PWM(p12)
 
 blue.off()
 
-
+#function to blink LED
 def blink_LED(colour):
 	colour.off()
 	time.sleep_ms(50)
 	colour.on()
 	time.sleep_ms(50)
 
-#setting up I2C for range finder
+#setting up I2C for range finder/ set up ADC
 i2c = machine.I2C(scl=machine.Pin(5), sda=machine.Pin(4), freq=100000)
 adc = ads1x15.ADS1115(i2c)
-adc.gain = 1
+adc.gain = 1 #ADS1015_REG_CONFIG_PGA_4_096V
 
 #setting up I2C for temp sens
 i2c_temp = machine.I2C(scl=machine.Pin(14), sda=machine.Pin(13), freq=100000)
@@ -70,7 +72,7 @@ def sub_cb(topic, msg):
     global temp
     
     print((topic, msg))
-#Check for messages only for the control topic
+	#Check for messages only for the control topic
     if topic == b"kk2314/feeds/control":	
     	if msg == b"start":
     		run = True	
@@ -79,8 +81,6 @@ def sub_cb(topic, msg):
     		payload_temp= "{}".format(temp)
     		c.publish(mqtt_temp,payload_temp)
     		print(temp)
-    	elif msg==b"music":
-    		countdown()
     	else:
     		lapnr = int(msg)
     		print(lapnr)
@@ -93,19 +93,22 @@ Connect to the wifi
 sta_if = network.WLAN(network.STA_IF) 
 sta_if.active(True) 
 sta_if.scan()
-sta_if.connect('Alfabeta', '12345678')
+sta_if.connect(wifi_ssid, wifi_pswd)
 print('Connecting to Wi-Fi')
-
+#while connecting blink LED and wait
 while not sta_if.isconnected():
 	blink_LED(red)
 	pass
 print('Wifi connected')
+#Turn red LED on
 red.off()
+
+# Turn off ESP8266's AP
 ap_if = network.WLAN(network.AP_IF) 
 ap_if.active(False)
 
-
-def convert(data):		#function to convert read data into Meters
+#Converts the data received from ultrasonic sensor into meters
+def convert(data):		
 	global distance 
 	
 	distance = data/10000
@@ -114,8 +117,8 @@ def convert(data):		#function to convert read data into Meters
 
 
 	
-
-def get_temp():	#add comment
+#Send a read request and read information of temp sensor as well as convert temp into degree celcius
+def get_temp():	
 	global temp
 	i2c_temp.writeto(0x40,bytearray([0xf3]))
 	time.sleep(0.5)
@@ -123,8 +126,9 @@ def get_temp():	#add comment
 	tempraw=int.from_bytes(data,"big")
 	temp = 175.72 * tempraw / 65536
 	temp = temp - 46.85
-	
-def countdown(): #add comment
+
+#sets up the buzzer to run a countdown composed of 3 short beeps and a long one	
+def countdown(): 
 	count = 0
 	freq = 300	
 	while count < 3:
@@ -138,15 +142,16 @@ def countdown(): #add comment
 	buzz.duty(512)
 	time.sleep(1.25)
 	buzz.duty(1023)	
-	
+
+#converts secs into min and seconds	
 def format(sec):
 	sec = sec/1000
 	mins,secs = divmod(sec, 60)
 	secs=round(secs, 3)	
 	return (mins, secs)
 	
-		
-def main(server):  #add comment
+#main() function which executes sensing and mqtt push		
+def main(server): 
 	global run
 	global lapnr
 	global nr
@@ -159,13 +164,13 @@ so we also set username and password
 """	
 	c = MQTTClient("Sensor boards", server, user = user, password = passwd)
 	c.set_callback(sub_cb)
-#sets flag for mqtt connected	
-	
+
+	#sets flag for mqtt connected	
 	if c.connect() == False:
 		mqttConnected = True 
 		print('MQTT Connected')
 			
-#subscribe to the topic where controls are received		
+	#subscribe to the topic where controls are received		
 	c.subscribe("kk2314/feeds/control")
 	
 	
@@ -177,9 +182,11 @@ so we also set username and password
 			c.wait_msg() #blocking check for message 
 		
 		
-		
-			if run == True:   #start timing laps 
-				run = False		
+			#start timing laps
+			if run == True: 
+				#reset the run flag   
+				run = False
+				#do countdown		
 				countdown()
 				c.publish(mqtt_debug,"Started countdown")
 				#start timer
@@ -265,8 +272,8 @@ so we also set username and password
 			c.check_msg() #non-blocking check for message 
 		
 		
-		
-			if run == True:   #start timing laps 
+			 #start timing laps
+			if run == True:   
 				run = False		
 				countdown()
 				c.publish(mqtt_debug,"Started countdown")
